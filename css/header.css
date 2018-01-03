@@ -5,6 +5,9 @@ body,ul,p{
 a{
 	text-decoration: none;
 }
+body{
+	background-color: #f5f9fc;
+}
 .header-bg{
 	width: 100%;
 	overflow: hidden;
