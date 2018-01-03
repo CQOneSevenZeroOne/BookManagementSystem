@@ -11,11 +11,6 @@ ul,li{margin: 0;padding: 0;}
 	border-right: 1px solid #eaeaea;
 	background-color: #fff;
 }
-.cont_right{
-	float: right;
-	width: 950px;
-	background-color: #fff;
-}
 /*左侧导航栏css样式设置*/
 .cont_left ul{
 	width: 100%;
@@ -74,4 +69,103 @@ ul,li{margin: 0;padding: 0;}
 .cont_left ul li li:hover{
 	background-color: #f5f9fc;
 	color: red;
+}
+
+
+/*右侧内容大盒子*/
+.cont_right{
+	float: right;
+	width: 950px;
+	background-color: #fff;
+	margin-top: 40px;
+}
+/*通过作者查询图书信息*/
+#search_byAuthor{
+	display: none;
+}
+.search_author{
+	width: 950px;
+	background-color: #f5f9fc;
+}
+/*搜索框*/
+.author_find{
+	height: 78px;
+	width: 928px;
+	padding-left: 20px;
+	border: 1px solid #eaeaea;
+	border-radius: 4px;
+	background-color: #fff;
+}
+.author_find h3{
+	width: 100%;height: 36px;
+	font: 14px/36px "微软雅黑";
+	font-weight: 500;
+}
+.author_find p{
+	width: 300px;height: 28px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font: 14px/28px "微软雅黑";
+}
+.author_find p input{
+	float: left;
+	border: 0;height: 28px;
+	width: 250px;
+	padding-left: 10px;
+	outline: none;
+}
+.author_find p button{
+	float: left;
+	border: 0;height: 28px;
+	width: 40px;
+	background-color: #ed5564;
+	color: #fff;
+	outline: none;
+}
+/*通过作者查询图书信息结果显示*/
+.author_cont{
+	width: 100%;
+	margin-top: 20px;
+}
+.author_cont table{
+	width: 100%;
+}
+.author_cont table th{
+	height: 50px;
+	background-color: #f1f1f1;
+	color: #666;
+}
+.author_cont table td{
+	background-color: #fff;
+	text-align: center;
+	height: 79px;
+	border-bottom: 1px solid #ededed;
+	color: #919191;
+	font-size: 14px;
+}
+/*查询学生信息样式*/
+.stuMess{
+	width: 100%;
+}
+.stu_findway{
+	width: 100%;
+}
+.stu_findway ul{
+	height: 36px;
+}
+.stu_findway ul li{
+	float: left;
+	padding: 0 25px;
+	list-style: none;
+	font: 14px/36px "微软雅黑";
+	background-color: #f1f1f1;
+	border-right: 1px solid #fff;
+}
+.stu_findway li input{
+	height: 20px;width: 235px;
+	border: 1px solid #EAEAEA;
+	border-radius: 4px;
+}
+.stu_findway ul li:hover{
+	background-color: #fff;
 }
