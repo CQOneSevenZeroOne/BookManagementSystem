@@ -65,5 +65,4 @@ $(function(){
 		$("#cont").load("html/penalty.html");
 	})
 	
-	$("#searchById").load("html/search_id.html");
 })

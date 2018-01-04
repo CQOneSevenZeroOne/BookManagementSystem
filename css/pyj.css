@@ -1,7 +1,4 @@
 /*通过作者查询图书信息*/
-#search_byAuthor{
-	display: none;
-}
 .search_author{
 	width: 950px;
 	background-color: #f5f9fc;
@@ -118,10 +115,7 @@
 	color: #919191;
 	font-size: 14px;
 }
-/*默认隐藏学生信息查询板块*/
-#stu_search{
-	display: none;
-}
+
 
 
 /*借阅记录板块css样式*/
@@ -152,10 +146,7 @@
 	color: #ED5564;
 }
 
-/*默认隐藏借阅记录板块*/
-#loaningRecord{
-	display: none;
-}
+
 
 /*罚款管理模块样式设置*/
 .penalty{
