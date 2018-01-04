@@ -73,132 +73,16 @@ ul,li{margin: 0;padding: 0;}
 }
 
 
-<<<<<<< HEAD
-=======
 /* 通过编号id查询图书样式 */
 
->>>>>>> a6fb55e9cc2b5fa6c757b177c16e50fb6607ed75
 /*右侧内容大盒子*/
 .cont_right{
 	float: right;
 	width: 950px;
-	background-color: #fff;
+	/*background-color: #fff;*/
 	margin-top: 40px;
 }
-/*通过作者查询图书信息*/
-<<<<<<< HEAD
-#search_byAuthor{
-	display: none;
-}
-.search_author{
-=======
-.search_id{
->>>>>>> a6fb55e9cc2b5fa6c757b177c16e50fb6607ed75
-	width: 950px;
-	background-color: #f5f9fc;
-}
-/*搜索框*/
-<<<<<<< HEAD
-.author_find{
-=======
-.id_find{
->>>>>>> a6fb55e9cc2b5fa6c757b177c16e50fb6607ed75
-	height: 78px;
-	width: 928px;
-	padding-left: 20px;
-	border: 1px solid #eaeaea;
-	border-radius: 4px;
-	background-color: #fff;
-}
-<<<<<<< HEAD
-.author_find h3{
-	width: 100%;height: 36px;
-	font: 14px/36px "微软雅黑";
-	font-weight: 500;
-}
-.author_find p{
-=======
-.id_find h3{
-	width: 100%;
-	height: 36px;
-	font: 14px/36px "微软雅黑";
-	font-weight: 500;
-}
-.id_find p{
->>>>>>> a6fb55e9cc2b5fa6c757b177c16e50fb6607ed75
-	width: 300px;height: 28px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	font: 14px/28px "微软雅黑";
-}
-<<<<<<< HEAD
-.author_find p input{
-=======
-.id_find p input{
->>>>>>> a6fb55e9cc2b5fa6c757b177c16e50fb6607ed75
-	float: left;
-	border: 0;height: 28px;
-	width: 250px;
-	padding-left: 10px;
-	outline: none;
-}
-<<<<<<< HEAD
-.author_find p button{
-	float: left;
-	border: 0;height: 28px;
-	width: 40px;
-	background-color: #ed5564;
-	color: #fff;
-	outline: none;
-}
-/*通过作者查询图书信息结果显示*/
-.author_cont{
-	width: 100%;
-	margin-top: 20px;
-}
-.author_cont table{
-	width: 100%;
-}
-.author_cont table th{
-	height: 50px;
-	background-color: #f1f1f1;
-	color: #666;
-}
-.author_cont table td{
-	background-color: #fff;
-	text-align: center;
-	height: 79px;
-	border-bottom: 1px solid #ededed;
-	color: #919191;
-	font-size: 14px;
-}
-/*查询学生信息样式*/
-.stuMess{
-	width: 100%;
-}
-.stu_findway{
-	width: 100%;
-}
-.stu_findway ul{
-	height: 36px;
-}
-.stu_findway ul li{
-	float: left;
-	padding: 0 25px;
-	list-style: none;
-	font: 14px/36px "微软雅黑";
-	background-color: #f1f1f1;
-	border-right: 1px solid #fff;
-}
-.stu_findway li input{
-	height: 20px;width: 235px;
-	border: 1px solid #EAEAEA;
-	border-radius: 4px;
-}
-.stu_findway ul li:hover{
-	background-color: #fff;
-}
-=======
+
 .id_find p button{
 	float: left;
 	border: 0;height: 28px;
@@ -232,4 +116,3 @@ ul,li{margin: 0;padding: 0;}
 	font-weight: 500;
 
 }
->>>>>>> a6fb55e9cc2b5fa6c757b177c16e50fb6607ed75
