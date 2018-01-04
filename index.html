@@ -15,6 +15,8 @@
 		<link rel="stylesheet" type="text/css" href="css/pass_change.css"/>
 		<link rel="stylesheet" type="text/css" href="css/lend_state_change.css"/>
 		<link rel="stylesheet" type="text/css" href="css/book_num_change.css"/>
+		<!-- 查询 -->
+		<link rel="stylesheet" type="text/css" href="css/search_byId.css"/>
 		<!--首页-->
 		<link rel="stylesheet" type="text/css" href="css/index.css"/>
 	</head>
@@ -31,9 +33,9 @@
 						<ul>
 							<li id="addbook">新增图书</li>
 							<li>图书挂失</li>
-							<li>图书续借</li>
+							<li id="delayBorrow">图书续借</li>
 							<li id="deletebook">图书下架</li>
-							<li>状态审核</li>
+							<li id="checkStatus">状态审核</li>
 							<li id="num">修改数量</li>
 						</ul>
 					</li>
@@ -51,9 +53,9 @@
 					<li>
 						<span>信息查询</span><i></i>
 						<ul>
-							<li>通过ID查询图书</li>
-							<li>通过书名查询图书</li>
-							<li>通过类别查询图书</li>
+							<li id="sear_byBookId">通过ID查询图书</li>
+							<li id="sear_byBookName">通过书名查询图书</li>
+							<li id="sear_byBookSort">通过类别查询图书</li>
 							<li>通过作者查询图书</li>
 							<li>通过ID查询学生</li>
 							<li>查询图书借阅记录</li>
