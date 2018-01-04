@@ -29,12 +29,21 @@ $(function(){
 		$("#cont").load("html/DeleteUser.html");
 	})
 	//通过作者查询图书信息
-	$("#search_byAuthor").load("html/search_author.html");
+	$("#authorSearch").click(function(){
+		$("#cont").load("html/search_author.html");
+	})
 	//学生信息查询
-	$("#stu_search").load("html/stu_search.html");
+	$("#stuSearch").click(function(){
+		$("#cont").load("html/stu_search.html");
+	})
 	//借阅记录查询
-	$("#loaningRecord").load("html/loaningRecord.html")
+	$("#loanSearch").click(function(){
+		$("#cont").load("html/loaningRecord.html");
+	})
 	//罚款管理
-	$("#penalty").load("html/penalty.html");
+	$("#pena").click(function(){
+		$("#cont").load("html/penalty.html");
+	})
+	
 	$("#searchById").load("html/search_id.html");
 })
