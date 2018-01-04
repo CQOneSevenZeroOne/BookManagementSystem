@@ -73,16 +73,16 @@ ul,li{margin: 0;padding: 0;}
 }
 
 
-<<<<<<< HEAD
-=======
+/*<<<<<<< HEAD
+=======*/
 /* 通过编号id查询图书样式 */
 
->>>>>>> a6fb55e9cc2b5fa6c757b177c16e50fb6607ed75
+/*>>>>>>> a6fb55e9cc2b5fa6c757b177c16e50fb6607ed75*/
 /*右侧内容大盒子*/
 .cont_right{
 	float: right;
 	width: 950px;
-	background-color: #fff;
+	/*background-color: #fff;*/
 	margin-top: 40px;
 }
 /*通过作者查询图书信息*/
