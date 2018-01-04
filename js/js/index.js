@@ -1,9 +1,7 @@
 $(function(){
 	//头部
 	$("#header").load("html/header.html");
-	$("#search_byAuthor").load("html/search_author.html");
-	$("#stu_search").load("html/stu_search.html");
-	$("#searchById").load("html/search_id.html");
+	
 	//修改
 	$("#edit").click(function(){
 		$("#cont").load("html/student.html");
@@ -30,4 +28,13 @@ $(function(){
 	$("#deletestu").click(function(){
 		$("#cont").load("html/DeleteUser.html");
 	})
+	//通过作者查询图书信息
+	$("#search_byAuthor").load("html/search_author.html");
+	//学生信息查询
+	$("#stu_search").load("html/stu_search.html");
+	//借阅记录查询
+	$("#loaningRecord").load("html/loaningRecord.html")
+	//罚款管理
+	$("#penalty").load("html/penalty.html");
+	$("#searchById").load("html/search_id.html");
 })

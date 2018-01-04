@@ -82,37 +82,3 @@ ul,li{margin: 0;padding: 0;}
 	/*background-color: #fff;*/
 	margin-top: 40px;
 }
-
-.id_find p button{
-	float: left;
-	border: 0;height: 28px;
-	width: 40px;
-	background-color: #0180cd;
-	color: #fff;
-	outline: none;
-}
-.con-book{
-	margin-top: 25px;
-	background: #fff;
-}
-.con-book table{
-	width: 100%;
-	border-collapse: collapse;
-	font-size: 12px;
-	color: #8c8c8c;
-}
-.con-book table tr{
-	width: 8%;
-	line-height: 80px;
-	text-align: center;
-}
-.con-book table thead{
-	background: #f1f1f1;	
-}
-.con-book table thead tr{
-	line-height: 50px;
-	font-size: 14px;
-	color: #333;
-	font-weight: 500;
-
-}
