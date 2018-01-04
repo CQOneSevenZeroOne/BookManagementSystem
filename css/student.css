@@ -24,6 +24,7 @@ body,p{
 }
 .bt table{
 	width: 100%;
+	border-collapse: collapse;
 }
 .bt table th{
 	height: 50px;
@@ -37,4 +38,26 @@ body,p{
 	border-bottom: 1px solid #ededed;
 	color: #919191;
 	font-size: 14px;
+}
+.bt table td .student_info{
+	cursor: pointer;
+	width: 63px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    display: inline-block;
+    background: #ed5564;
+    color: white;
+    border-radius: 7px;
+}
+.bt table td .num{
+	cursor: pointer;
+	width: 63px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    display: inline-block;
+    background: #ed5564;
+    color: white;
+    border-radius: 7px;
 }

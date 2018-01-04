@@ -17,14 +17,25 @@ $(function(){
 	
 	//修改学生信息
 	$("#edit").click(function(){
-		$("#cont").load("html/student.html");
+		$("#cont").load("html/student.html",function(){
+			$(".student_info").click(function(){
+				$("#cont").load("html/student_change.html");
+			})
+		});
+	})
+	//修改图书数量
+	$("#loss").click(function(){
+		$("#cont").load("html/book_num.html",function(){
+			$(".num").click(function(){
+				$("#cont").load("html/book_num_change.html");
+			})
+		});
 	})
 	//修改密码
 	$("#pass").click(function(){
 		$("#cont").load("html/pass_change.html");
 	})
-//	var student_operate=$("#student_info").lastChild();
-//	console.log(student_operate);
+
 	
 	//图书状态审核
 	$("#checkStatus").click(function(){
@@ -34,12 +45,6 @@ $(function(){
 	$("#delayBorrow").click(function(){
 		$("#cont").load("html/delayBorrow.html");
 	})
-	$("#student_change").load("html/student_change.html");
-	$("#book_num").load("html/book_num.html");
-	$("#book_num_change").load("html/book_num_change.html");
-	$("#lend_state").load("html/lend_state.html");
-	$("#lend_state_change").load("html/lend_state_change.html");
-	$("#pass_change").load("html/pass_change.html");
 	//增加
 	$("#addbook").click(function(){
 		$("#cont").load("html/AddBook.html");
