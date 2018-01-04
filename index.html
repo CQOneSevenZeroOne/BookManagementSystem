@@ -15,6 +15,8 @@
 		<link rel="stylesheet" type="text/css" href="css/pass_change.css"/>
 		<link rel="stylesheet" type="text/css" href="css/lend_state_change.css"/>
 		<link rel="stylesheet" type="text/css" href="css/book_num_change.css"/>
+		<!-- 查询 -->
+		<link rel="stylesheet" type="text/css" href="css/search_byId.css"/>
 		<!--首页-->
 		<link rel="stylesheet" type="text/css" href="css/index.css"/>
 		<!-- 通过作者查询、学生查询、借阅记录、罚款管理css样式-->
@@ -33,9 +35,9 @@
 						<ul>
 							<li id="addbook">新增图书</li>
 							<li>图书挂失</li>
-							<li>图书续借</li>
+							<li id="delayBorrow">图书续借</li>
 							<li id="deletebook">图书下架</li>
-							<li>状态审核</li>
+							<li id="checkStatus">状态审核</li>
 							<li id="num">修改数量</li>
 						</ul>
 					</li>
@@ -47,18 +49,18 @@
 							<li id="edit">修改信息</li>
 						</ul>
 					</li>
-					<li>
+					<li id="pena">
 						<span>罚款管理</span>
 					</li>
 					<li>
 						<span>信息查询</span><i></i>
 						<ul>
-							<li>通过ID查询图书</li>
-							<li>通过书名查询图书</li>
-							<li>通过类别查询图书</li>
-							<li>通过作者查询图书</li>
-							<li>通过ID查询学生</li>
-							<li>查询图书借阅记录</li>
+							<li id="sear_byBookId">通过ID查询图书</li>
+							<li id="sear_byBookName">通过书名查询图书</li>
+							<li id="sear_byBookSort">通过类别查询图书</li>
+							<li id="authorSearch">通过作者查询图书</li>
+							<li id="stuSearch">通过查询学生信息</li>
+							<li id="loanSearch">查询图书借阅记录</li>
 						</ul>
 					</li>
 					<li>
@@ -71,15 +73,6 @@
 			</div>
 			<div class="cont_right">
 				<div id="cont"></div>
-				<!--通过作者查询图书信息-->
-				<div id="search_byAuthor"></div>
-				<!--学生信息查询-->
-				<div id="stu_search"></div>
-				<!--借阅记录查询-->
-				<div id="loaningRecord"></div>
-				<!--罚款管理-->
-				<div id="penalty"></div>
-				<div id="searchById"></div>
 			</div>
 		</div>
 	</body>

@@ -1,6 +1,19 @@
 $(function(){
 	//头部
 	$("#header").load("html/header.html");
+	//查询
+	//通过id查找书
+	$("#sear_byBookId").click(function(){
+		$("#cont").load("html/search_id.html");
+	})
+	//通过书名查找书
+	$("#sear_byBookName").click(function(){
+		$("#cont").load("html/search_byName.html");
+	})
+	//通过类别查找书
+	$("#sear_byBookSort").click(function(){
+		$("#cont").load("html/search_byBookSort.html");
+	})
 	
 	//修改学生信息
 	$("#edit").click(function(){
@@ -13,12 +26,20 @@ $(function(){
 //	var student_operate=$("#student_info").lastChild();
 //	console.log(student_operate);
 	
-//	$("#student_change").load("html/student_change.html");
-//	$("#book_num").load("html/book_num.html");
-//	$("#book_num_change").load("html/book_num_change.html");
-//	$("#lend_state").load("html/lend_state.html");
-//	$("#lend_state_change").load("html/lend_state_change.html");
-	
+	//图书状态审核
+	$("#checkStatus").click(function(){
+		$("#cont").load("html/check_borrowStatus.html");
+	})
+	//图书续借
+	$("#delayBorrow").click(function(){
+		$("#cont").load("html/delayBorrow.html");
+	})
+	$("#student_change").load("html/student_change.html");
+	$("#book_num").load("html/book_num.html");
+	$("#book_num_change").load("html/book_num_change.html");
+	$("#lend_state").load("html/lend_state.html");
+	$("#lend_state_change").load("html/lend_state_change.html");
+	$("#pass_change").load("html/pass_change.html");
 	//增加
 	$("#addbook").click(function(){
 		$("#cont").load("html/AddBook.html");
@@ -33,5 +54,22 @@ $(function(){
 	})
 	$("#deletestu").click(function(){
 		$("#cont").load("html/DeleteUser.html");
+	})
+
+	//通过作者查询图书信息
+	$("#authorSearch").click(function(){
+		$("#cont").load("html/search_author.html");
+	})
+	//学生信息查询
+	$("#stuSearch").click(function(){
+		$("#cont").load("html/stu_search.html");
+	})
+	//借阅记录查询
+	$("#loanSearch").click(function(){
+		$("#cont").load("html/loaningRecord.html");
+	})
+	//罚款管理
+	$("#pena").click(function(){
+		$("#cont").load("html/penalty.html");
 	})
 })
