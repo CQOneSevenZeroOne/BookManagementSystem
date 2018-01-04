@@ -1,10 +1,7 @@
 $(function(){
 	//头部
 	$("#header").load("html/header.html");
-<<<<<<< HEAD
 	//查询
-	$("#search_byAuthor").load("html/search_author.html");
-	$("#stu_search").load("html/stu_search.html");
 	//通过id查找书
 	$("#sear_byBookId").click(function(){
 		$("#cont").load("html/search_id.html");
@@ -17,9 +14,7 @@ $(function(){
 	$("#sear_byBookSort").click(function(){
 		$("#cont").load("html/search_byBookSort.html");
 	})
-=======
 	
->>>>>>> a793144b682509faf7335a9d1f73b90b847a39c3
 	//修改
 	$("#edit").click(function(){
 		$("#cont").load("html/student.html");
@@ -54,12 +49,21 @@ $(function(){
 		$("#cont").load("html/DeleteUser.html");
 	})
 	//通过作者查询图书信息
-	$("#search_byAuthor").load("html/search_author.html");
+	$("#authorSearch").click(function(){
+		$("#cont").load("html/search_author.html");
+	})
 	//学生信息查询
-	$("#stu_search").load("html/stu_search.html");
+	$("#stuSearch").click(function(){
+		$("#cont").load("html/stu_search.html");
+	})
 	//借阅记录查询
-	$("#loaningRecord").load("html/loaningRecord.html")
+	$("#loanSearch").click(function(){
+		$("#cont").load("html/loaningRecord.html");
+	})
 	//罚款管理
-	$("#penalty").load("html/penalty.html");
+	$("#pena").click(function(){
+		$("#cont").load("html/penalty.html");
+	})
+	
 	$("#searchById").load("html/search_id.html");
 })
