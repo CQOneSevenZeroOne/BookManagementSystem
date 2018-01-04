@@ -71,10 +71,6 @@ ul,li{margin: 0;padding: 0;}
 	background-color: #f5f9fc;
 	color: red;
 }
-
-
-/* 通过编号id查询图书样式 */
-
 /*右侧内容大盒子*/
 .cont_right{
 	float: right;
