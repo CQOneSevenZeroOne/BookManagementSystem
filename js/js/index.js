@@ -153,10 +153,28 @@ $(function(){
 		});
 	})
 	
-	//修改
+	//修改学生信息
 	$("#edit").click(function(){
-		$("#cont").load("html/student.html");
+		$("#cont").load("html/student.html",function(){
+			$(".student_info").click(function(){
+				$("#cont").load("html/student_change.html");
+			})
+		});
 	})
+	//修改图书数量
+	$("#loss").click(function(){
+		$("#cont").load("html/book_num.html",function(){
+			$(".num").click(function(){
+				$("#cont").load("html/book_num_change.html");
+			})
+		});
+	})
+	//修改密码
+	$("#pass").click(function(){
+		$("#cont").load("html/pass_change.html");
+	})
+
+	
 	//图书状态审核
 	$("#checkStatus").click(function(){
 		$("#cont").load("html/check_borrowStatus.html");
@@ -165,7 +183,10 @@ $(function(){
 	$("#delayBorrow").click(function(){
 		$("#cont").load("html/delayBorrow.html");
 	})
+<<<<<<< HEAD
 
+=======
+>>>>>>> d1e316e49085714361454d3d82778e945ee1226f
 	//增加
 	$("#addbook").click(function(){
 		$("#cont").load("html/AddBook.html");
@@ -181,6 +202,7 @@ $(function(){
 	$("#deletestu").click(function(){
 		$("#cont").load("html/DeleteUser.html");
 	})
+
 	//通过作者查询图书信息
 	$("#authorSearch").click(function(){
 		$("#cont").load("html/search_author.html");
@@ -197,5 +219,4 @@ $(function(){
 	$("#pena").click(function(){
 		$("#cont").load("html/penalty.html");
 	})
-	
 })

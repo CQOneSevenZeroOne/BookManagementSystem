@@ -1,5 +1,5 @@
 body,ul,li,p,input{margin:0;padding:0;}
-.pass_change{
+.num_change{
     width:950px;
     margin:0 auto;
 }
@@ -61,5 +61,6 @@ body,ul,li,p,input{margin:0;padding:0;}
     height:30px;
     color:white;
     float: left;
-    margin-left: 36px;
+    margin-left: 75px;
+    border-radius: 7px;
 }
