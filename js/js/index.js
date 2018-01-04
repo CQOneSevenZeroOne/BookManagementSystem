@@ -1,12 +1,32 @@
 $(function(){
 	//头部
 	$("#header").load("html/header.html");
+	//查询
+	//通过id查找书
+	$("#sear_byBookId").click(function(){
+		$("#cont").load("html/search_id.html");
+	})
+	//通过书名查找书
+	$("#sear_byBookName").click(function(){
+		$("#cont").load("html/search_byName.html");
+	})
+	//通过类别查找书
+	$("#sear_byBookSort").click(function(){
+		$("#cont").load("html/search_byBookSort.html");
+	})
 	
 	//修改
 	$("#edit").click(function(){
 		$("#cont").load("html/student.html");
 	})
-	
+	//图书状态审核
+	$("#checkStatus").click(function(){
+		$("#cont").load("html/check_borrowStatus.html");
+	})
+	//图书续借
+	$("#delayBorrow").click(function(){
+		$("#cont").load("html/delayBorrow.html");
+	})
 	$("#student_change").load("html/student_change.html");
 	$("#book_num").load("html/book_num.html");
 	$("#book_num_change").load("html/book_num_change.html");
