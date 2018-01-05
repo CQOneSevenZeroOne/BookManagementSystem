@@ -1,3 +1,4 @@
+//前端js代码
 $(function() {
 	//头部
 	$("#header").load("html/header.html");
@@ -752,6 +753,11 @@ $(function() {
 						}
 						$("#search_noReturn").prev().val('')
 						$(".penalty_cont table").html(str + str1);
+						a = $(".penalty_cont table tr td a");
+						a.click(function() {
+							var tr = $(this).parent().parent();
+							returnFine(tr);
+						})
 					});
 					//显示所有记录
 					$("#loan_all").on("click", function() {
@@ -779,19 +785,24 @@ $(function() {
 									str1 = `<tr><td colspan="8">无未缴纳罚款</td></tr>`;
 								}
 								$(".penalty_cont table").html(str + str1);
+								a = $(".penalty_cont table tr td a");
+								a.click(function() {
+									var tr = $(this).parent().parent();
+									returnFine(tr);
+								})
 							}
 						})
 					});
 					//点击还款：将未归还图书归还改变状态，已归还图书罚款金额变为0
 					var a = $(".penalty_cont table tr td a");
-					console.log(a)
 					a.click(function() {
 						var tr = $(this).parent().parent();
+						returnFine(tr);
+					})
+					function returnFine(tr){
 						var id = tr.children(0).html();
 						var return_time = tr.children().eq(4).html();
-						if(return_time.length == 0) {
-
-						} else {
+						if(return_time.length != 0){
 							var status = tr.children().eq(5);
 							status.html('yes');
 							var money = tr.children().eq(6);
@@ -805,10 +816,8 @@ $(function() {
 								}
 							});
 							tr.remove();
-							a = $(".penalty_cont table tr td a");
-							console.log(a)
 						}
-					})
+					}
 				}
 			});
 		});
