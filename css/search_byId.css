@@ -48,13 +48,13 @@
 	color: #8c8c8c;
 }
 .con-book table tr{
-	width: 8%;
 	line-height: 80px;
 	text-align: center;
 }
 .con-book table thead{
 	background: #f1f1f1;	
 }
+
 .con-book table thead tr{
 	line-height: 50px;
 	font-size: 14px;
@@ -98,7 +98,7 @@
 	padding-left: 20px;
 }
 .book_sort_box a{
-	margin-right: 8px;
+	margin-right: 17px;
 	color: #333;
 }
 .book_sort_box a:hover{
