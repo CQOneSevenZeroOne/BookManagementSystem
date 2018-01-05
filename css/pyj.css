@@ -1,4 +1,5 @@
-﻿/*通过作者查询图书信息*/
+﻿body{background-color: #f5f9fc;}
+/*通过作者查询图书信息*/
 .search_author{
 	width: 950px;
 	background-color: #f5f9fc;
@@ -178,4 +179,50 @@
 .find_color{
 	background-color: #ed5564 !important;
     color: #fff !important;
+}
+
+/*登录页面样式设置*/
+#login{
+	width:300px;
+	margin: 50px auto;
+	padding-bottom: 15px;
+	border: 1px solid #ED5564;
+	border-radius: 4px;
+}
+#login h3{
+	margin: 0;
+	width: 280px;height: 50px;
+	padding-left:20px ;
+	background-color: #ED5564;
+	color: #fff;
+	font: 20px/50px "微软雅黑";
+}
+#login p{
+	height: 30px;
+	margin: 25px 0;
+}
+#login p input{
+	float: left;
+	margin: 0;padding: 0;
+	border: 0;outline: none;
+	width: 200px;height: 28px;
+	border: 1px solid #EAEAEA;
+	border-radius: 4px;
+	font:14px/28px "微软雅黑";
+	padding-left: 10px;
+}
+#login p span{
+	float: left;
+	width: 50px;height: 30px;
+	font:14px/30px "微软雅黑";
+	padding-left: 20px;
+}
+#login button{
+	margin: 0;padding: 0;
+	border: 0;outline: none;
+	height: 30px;width: 100px;
+	background-color: #ED5564;
+	color: #fff;
+	font:16px/30px "微软雅黑";
+	margin-left: 100px;
 }
