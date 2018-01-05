@@ -21,23 +21,53 @@ http.createServer(function(req, res){
     var pathname = url.parse(req.url).pathname;
 	//连接后执行——查询
 	switch(pathname){
+		//查询所有学生信息
 		case '/stu':
 			connect.query('SELECT * FROM student', function (error, results, fields) {
 			if (error) throw error;
 			res.end(JSON.stringify(results));
 		});
 		break;
+		//查询借阅记录
 		case '/loan':
 			connect.query('SELECT * FROM borrow', function (error, results, fields) {
 			if (error) throw error;
 			res.end(JSON.stringify(results));
 		});
 		break;
+		//通过作者名查询图书信息
 		case '/author':
-		console.log(params.author)
 			connect.query(`SELECT * FROM book WHERE author like '%${params.author}%'`, function (error, results, fields) {
 			if (error) throw error;
-			console.log(results);
+			res.end(JSON.stringify(results));
+		});
+		break;
+		//查询未归还图书
+		case '/pena':
+			connect.query(`SELECT * FROM borrow WHERE fine != '0'`, function (error, results, fields) {
+			if (error) throw error;
+			res.end(JSON.stringify(results));
+		});
+		break;
+		//还款操作
+		case '/pena_pay':
+			connect.query(`UPDATE borrow SET fine=0 WHERE id = '${params.id}'`, function (error, results, fields) {
+			if (error) throw error;
+			res.end(JSON.stringify(results));
+		});
+		break;
+		//通过ID查询学生信息
+		case '/loan_stu':
+			connect.query(`SELECT * FROM student WHERE stu_id = '${params.id}'`, function (error, results, fields) {
+			if (error) throw error;
+			res.end(JSON.stringify(results));
+		});
+		break;
+		//通过ID查询图书信息
+		case '/loan_book':
+			connect.query(`SELECT * FROM book  WHERE book_id = '${params.id}'`, function (error, results, fields) {
+			if (error) throw error;
+			console.log(results)
 			res.end(JSON.stringify(results));
 		});
 		break;

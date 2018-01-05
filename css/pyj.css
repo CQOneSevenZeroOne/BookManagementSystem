@@ -83,7 +83,8 @@
 	cursor: pointer;
 }
 .stu_findway li input{
-	height: 20px;width: 235px;
+	height: 26px;width: 215px;
+	padding-left: 20px;
 	border: 1px solid #EAEAEA;
 	border-radius: 4px;
 }
@@ -172,3 +173,9 @@
     outline: none;
 }
 #pena{cursor:pointer;}
+
+/*查询背景色*/
+.find_color{
+	background-color: #ed5564 !important;
+    color: #fff !important;
+}
