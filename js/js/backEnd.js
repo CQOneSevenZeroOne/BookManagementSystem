@@ -244,6 +244,16 @@ app.post("/delstu",function(req, res){
         res.end(JSON.stringify(results));
     });
 })
+//修改密码
+app.post("/change_pass",function(req, res){
+    res.append("Access-Control-Allow-Origin","*");
+	var sql = `UPDATE maneger SET manager_pass='${req.body.new_pass}' WHERE id=${req.body.manager_id}`;
+	console.log(sql)
+    connect.query(sql, function (error, results, fields){
+        if (error) throw error;
+        res.end(JSON.stringify(results));
+    });
+})
 //监听端口
 app.listen(3000);
 console.log("开启服务器");
