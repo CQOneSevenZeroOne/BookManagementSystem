@@ -250,18 +250,305 @@ $(function(){
 
 	//通过作者查询图书信息
 	$("#authorSearch").click(function(){
-		$("#cont").load("html/search_author.html");
+		$("#cont").load("html/search_author.html",function(){
+			var btn = $("#author").next();
+			btn.click(function(){
+				var val = $("#author").val();
+				var str = `
+				<tr>
+					<th>图书编号</th><th>书名</th><th>类别</th><th>出版时间</th>
+					<th>出版社</th><th>库存</th><th>价格</th><th>可借数量</th>
+				</tr>
+				`;
+				$.ajax({
+					type:"get",
+					url:"http://localhost:3000/author",
+					async:true,
+					data:{
+						author:val
+					},
+					success:function(data){
+						data = JSON.parse(data);
+						var str1 = '';
+						for (var i in data) {
+							str1 += `
+							<tr>
+								<td>${data[i].book_id}</td><td>${data[i].book_name}</td><td>${data[i].sort}</td><td>${data[i].pub_time}</td>
+								<td>${data[i].publish}</td><td>${data[i].total_num}</td><td>${data[i].price}</td><td>${data[i].count}</td>
+							</tr>
+							`;
+						}
+						$(".author_cont table").html(str+str1);
+					}
+				});
+			});
+		});
 	})
 	//学生信息查询
 	$("#stuSearch").click(function(){
-		$("#cont").load("html/stu_search.html");
+		$("#cont").load("html/stu_search.html",function(){
+			var str = `<tr>
+				<th>学号</th><th>姓名</th><th>性别</th>
+				<th>专业</th><th>年龄</th><th>年级</th>
+			</tr>`;
+			var str1 = '';
+			$.ajax({
+				type:"get",
+				url:"http://localhost:3000/stu",
+				async:true,
+				success:function(data){
+					data = JSON.parse(data);
+					for(var i in data){
+						str1 += `
+						<tr>
+							<td>${data[i].stu_id}</td><td>${data[i].stu_name}</td><td>${data[i].sex}</td>
+							<td>${data[i].major}</td><td>${data[i].age}</td><td>${data[i].grade}</td>
+						</tr>
+						`;
+					}
+					$(".stu_findway_cont>table").html(str+str1);
+					var li = $(".stu_findway ul").find('li');
+					//通过ID查询学生信息
+					li.eq(1).on('click',function(){
+						var val = li.eq(0).children().val();
+						var str2 = '';var count=0;
+						if(val.length!=0){
+							for(var i in data){
+								if(data[i].stu_id==val){
+									str2 = `
+									<tr>
+										<td>${data[i].stu_id}</td><td>${data[i].stu_name}</td><td>${data[i].sex}</td>
+										<td>${data[i].major}</td><td>${data[i].age}</td><td>${data[i].grade}</td>
+									</tr>
+									`;
+									count++;
+								}
+							}
+							if(count==0){
+								str2 = '<tr><td colspan="6">无此信息！</td></tr>';
+							}
+							$(".stu_findway_cont>table").html(str+str2);
+						}
+						li.eq(0).children().val('');
+					});
+					//通过姓名查找学生信息
+					li.eq(2).on('click',function(){
+						var val = li.eq(0).children().val();
+						var str2 = '';var count=0;
+						if(val.length!=0){
+							for(var i in data){
+								if(data[i].stu_name.indexOf(val)!=-1){
+									str2 += `
+									<tr>
+										<td>${data[i].stu_id}</td><td>${data[i].stu_name}</td><td>${data[i].sex}</td>
+										<td>${data[i].major}</td><td>${data[i].age}</td><td>${data[i].grade}</td>
+									</tr>
+									`;
+									count++;
+								}
+							}
+							if(count==0){
+								str2 = '<tr><td colspan="6">无此信息！</td></tr>';
+							}
+							$(".stu_findway_cont>table").html(str+str2);
+						}
+						li.eq(0).children().val('');
+					});
+					//通过专业查询学生信息——模糊查询
+					li.eq(3).on('click',function(){
+						var val = li.eq(0).children().val();
+						var str2 = '';var count=0;
+						if(val.length!=0){
+							for(var i in data){
+								if(data[i].major.indexOf(val)!=-1){
+									str2 += `
+									<tr>
+										<td>${data[i].stu_id}</td><td>${data[i].stu_name}</td><td>${data[i].sex}</td>
+										<td>${data[i].major}</td><td>${data[i].age}</td><td>${data[i].grade}</td>
+									</tr>
+									`;
+									count++;
+								}
+							}
+							if(count==0){
+								str2 = '<tr><td colspan="6">无此信息！</td></tr>';
+							}
+							$(".stu_findway_cont>table").html(str+str2);
+						}
+						li.eq(0).children().val('');
+					});
+					//通过年级查询学生信息
+					li.eq(4).on('click',function(){
+						var val = li.eq(0).children().val();
+						var str2 = '';var count=0;
+						if(val.length!=0){
+							for(var i in data){
+								if(data[i].grade==val){
+									str2 += `
+									<tr>
+										<td>${data[i].stu_id}</td><td>${data[i].stu_name}</td><td>${data[i].sex}</td>
+										<td>${data[i].major}</td><td>${data[i].age}</td><td>${data[i].grade}</td>
+									</tr>
+									`;
+									count++;
+								}
+							}
+							if(count==0){
+								str2 = '<tr><td colspan="6">无此信息！</td></tr>';
+							}
+							$(".stu_findway_cont>table").html(str+str2);
+						}
+						li.eq(0).children().val('');
+					});
+					//显示所有学生信息
+					li.eq(5).on('click',function(){
+						$(".stu_findway_cont>table").html(str+str1);
+					});
+					
+				}
+			});
+			
+		});
 	})
 	//借阅记录查询
 	$("#loanSearch").click(function(){
-		$("#cont").load("html/loaningRecord.html");
+		$("#cont").load("html/loaningRecord.html",function(){
+			$.ajax({
+				type:"get",
+				url:"http://localhost:3000/loan",
+				async:true,
+				success:function(data){
+					data = JSON.parse(data);
+					var str = `
+					<tr>
+						<th>编号</th><th>学号</th><th>书籍编号</th>
+						<th>借书时间</th><th>还书时间</th><th>状态</th>
+						<th>罚款</th><th colspan="2">操作</th>
+					</tr>
+					`;
+					var str1 = '';
+					for (var i in data) {
+						var btime = data[i].borrow_time.split(' ')[0];
+						var rtime = data[i].return_time.split(' ')[0];
+						str1 += `
+						<tr>
+							<td>${data[i].id}</td><td>${data[i].stu_id}</td><td>${data[i].book_id}</td>
+							<td>${btime}</td><td>${rtime}</td><td>${data[i].status}</td>
+							<td>${data[i].fine}</td><td><a href="#">查看学生信息</a></td><td><a href="">查看图书信息</a></td>
+						</tr>
+						`;
+					}
+					$(".loan_cont table").html(str+str1);
+					//显示未归还记录
+					$("#loan_noReturn").on("click",function(){
+						str1 = '';
+						for (var j in data) {
+							if(data[j].status=='no'){
+								var btime = data[j].borrow_time.split(' ')[0];
+								var rtime = data[j].return_time.split(' ')[0];
+								str1 += `
+								<tr>
+									<td>${data[j].id}</td><td>${data[j].stu_id}</td><td>${data[j].book_id}</td>
+									<td>${btime}</td><td>${rtime}</td><td>${data[j].status}</td>
+									<td>${data[j].fine}</td><td><a href="#">查看学生信息</a></td><td><a href="">查看图书信息</a></td>
+								</tr>
+								`;
+							}
+						}
+						$(".loan_cont table").html(str+str1);
+						$("#loan_noReturn").attr({"class":'loat_check'});
+						$("#loan_all").attr({"class":''});
+						str1 = '';
+					});
+					//显示所有记录
+					$("#loan_all").on("click",function(){
+						for (var j in data) {
+							var btime = data[j].borrow_time.split(' ')[0];
+							var rtime = data[j].return_time.split(' ')[0];
+							str1 += `
+							<tr>
+								<td>${data[j].id}</td><td>${data[j].stu_id}</td><td>${data[j].book_id}</td>
+								<td>${btime}</td><td>${rtime}</td><td>${data[j].status}</td>
+								<td>${data[j].fine}</td><td><a href="#">查看学生信息</a></td><td><a href="">查看图书信息</a></td>
+							</tr>
+							`;
+						}
+						$(".loan_cont table").html(str+str1);
+						str1 = '';
+						$("#loan_all").attr({"class":'loat_check'});
+						$("#loan_noReturn").attr({"class":''});
+					});
+				}
+			});
+		});
 	})
 	//罚款管理
 	$("#pena").click(function(){
-		$("#cont").load("html/penalty.html");
+		$("#cont").load("html/penalty.html",function(){
+			$.ajax({
+				type:"get",
+				url:"http://localhost:3000/loan",
+				async:true,
+				success:function(data){
+					data = JSON.parse(data);
+					var str1 = '';
+					var str = `
+					<tr>
+						<th>编号</th><th>学号</th><th>书籍编号</th>
+						<th>应还时间</th><th>还书时间</th><th>状态</th>
+						<th>罚款</th><th>操作</th>
+					</tr>
+					`;
+					for (var i in data) {
+						var btime = data[i].borrow_time.split(' ')[0];
+						var rtime = data[i].return_time.split(' ')[0];
+						str1 += `
+						<tr>
+							<td>${data[i].id}</td><td>${data[i].stu_id}</td><td>${data[i].book_id}</td>
+							<td>${btime}</td><td>${rtime}</td><td>${data[i].status}</td>
+							<td>${data[i].fine}</td><td><a href="#">还款</a></td>
+						</tr>
+						`;
+					}
+					$(".penalty_cont table").html(str+str1)
+					//通过学号查询
+					$("#search_noReturn").on("click",function(){
+						str1 = '';
+						var vals = $("#search_noReturn").prev().val();
+						for (var j in data) {
+							if(data[j].stu_id==vals){
+								var btime = data[j].borrow_time.split(' ')[0];
+								var rtime = data[j].return_time.split(' ')[0];
+								str1 += `
+								<tr>
+									<td>${data[j].id}</td><td>${data[j].stu_id}</td><td>${data[j].book_id}</td>
+									<td>${btime}</td><td>${rtime}</td><td>${data[j].status}</td>
+									<td>${data[j].fine}</td><td><a href="#">还款</a></td>
+								</tr>
+								`;
+							}
+						}
+						$("#search_noReturn").prev().val('')
+						$(".penalty_cont table").html(str+str1);
+					});
+					//显示所有记录
+					$("#loan_all").on("click",function(){
+						str1 = '';
+						for (var j in data) {
+							var btime = data[j].borrow_time.split(' ')[0];
+							var rtime = data[j].return_time.split(' ')[0];
+							str1 += `
+							<tr>
+								<td>${data[j].id}</td><td>${data[j].stu_id}</td><td>${data[j].book_id}</td>
+								<td>${btime}</td><td>${rtime}</td><td>${data[j].status}</td>
+								<td>${data[j].fine}</td><td><a href="#">还款</a></td>
+							</tr>
+							`;
+						}
+						$(".penalty_cont table").html(str+str1);
+					});
+				}
+			});
+		});
 	})
 })
