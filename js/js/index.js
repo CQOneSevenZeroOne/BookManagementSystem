@@ -18,17 +18,65 @@ $(function(){
 	//修改学生信息
 	$("#edit").click(function(){
 		$("#cont").load("html/student.html",function(){
-			$(".student_info").click(function(){
-				$("#cont").load("html/student_change.html");
-			})
+			$.ajax({
+				type:"get",
+				url:"http://localhost:6789/getstudent",
+				async:true,
+				dataType:"json",
+				success:function(data){
+					var str='';
+					for(var i in data){
+						str+=`<tr>
+							<td>${data[i].stu_id}</td>
+							<td>${data[i].stu_name}</td>
+							<td>${data[i].sex}</td>
+							<td>${data[i].age}</td>
+							<td>${data[i].major}</td>
+							<td>${data[i].grade}</td>
+							<td><span class="student_info">修改</span></td>
+						</tr>`
+					}
+					$(".bt table tbody").html(str);
+						$(".student_info").click(function(){
+						$("#cont").load("html/student_change.html")
+						
+					})
+				}
+			});
+		
 		});
 	})
 	//修改图书数量
 	$("#loss").click(function(){
 		$("#cont").load("html/book_num.html",function(){
-			$(".num").click(function(){
-				$("#cont").load("html/book_num_change.html");
-			})
+			$.ajax({
+				type:"get",
+				url:"http://localhost:6789/getnum",
+				async:true,
+				dataType:"json",
+				success:function(data){
+					var str='';
+					for(var i in data){
+						str+=`<tr>
+							<td>${data[i].book_id}</td>
+							<td>${data[i].book_name}</td>
+							<td>${data[i].sort}</td>
+							<td>${data[i].author}</td>
+							<td>${data[i].price}</td>
+							<td>${data[i].total_num}</td>
+							<td>${data[i].count}</td>
+							<td>${data[i].location}</td>
+							<td><span class="num">修改</span></td>
+						</tr>`
+					}
+					$(".bt table tbody").html(str);
+					$(".num").click(function(){
+						$("#cont").load("html/book_num_change.html");
+						
+					})
+				}
+			});
+			
 		});
 	})
 	//修改密码
