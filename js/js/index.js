@@ -225,11 +225,160 @@ $(function(){
 	
 	//图书状态审核
 	$("#checkStatus").click(function(){
-		$("#cont").load("html/check_borrowStatus.html");
+		$("#cont").load("html/check_borrowStatus.html",function(){
+			//先获取所有的借阅记录
+			$.ajax({
+				url: 'http://localhost:3000/getAllBorrow',
+				type: 'GET',
+				dataType: 'json',
+				success:function(data){
+					console.log(data);
+					var str = '';
+					for(var i in data){
+						str+=`<tr>
+								<td>${data[i].id}</td>
+								<td>${data[i].stu_id}</td>
+								<td>${data[i].book_id}</td>
+								<td>${data[i].borrow_time}</td>
+								<td>${data[i].return_time}</td>
+								<td class="borrow_status">${data[i].status}</td>
+								<td>${data[i].fine}</td>
+								<td>${data[i].current}</td>
+								<td><a href="#" class="editStatus" data-status="${data[i].status}" data-id="${data[i].id}" data-return = "${data[i].return_time}">更改状态</a></td>
+							</tr>`
+					}
+					$(".con-book table tbody").html(str);
+					//如果状态为yes为绿色  为no为红色
+					$.each($(".borrow_status"),function(index, el) {
+						console.log($(el));
+						if($(el).html()=='yes'){
+						    $(el).css({"color":"green","font-weight":"800"});
+						}
+						if($(el).html()=='no'){
+							$(el).css({"color":"red","font-weight":"800"});
+						}
+					});
+					//点击修改状态后，修改状态并结算罚款，并确定还书时间
+					$(".editStatus").click(function(){
+						
+						//s表示状态，fine表示罚款
+						var s = '';
+						var fine = 0;
+						if($(this).parent().prev().prev().prev().html() == "yes"){
+							s = 'no';
+						}else{
+							s = 'yes';
+						}
+						//计算还书时间和应还时间之间的天数，算出罚款
+						if(timeDiff(StringTime(new Date(),"-"),$(this).attr("data-return"))>0){
+							fine = Number.parseInt(Number(timeDiff(StringTime(new Date(),"-"),$(this).attr("data-return")))*0.1*10)/10;
+						}else{
+							fine = 0;
+						}
+						console.log(fine);
+						console.log(s);
+						//计算两个时间的天数差值
+						function timeDiff(date1,date2){
+							var d1 = Date.parse(date1);
+							var d2 = Date.parse(date2);
+							var day = Math.abs(Math.floor(d1/(24*3600*1000)) - Math.floor(d2/(24*3600*1000)));
+							return day;
+						}
+						//将还书时间，罚款，状态更新到页面上
+						$(this).parent().prev().html(StringTime(new Date(),"-"));
+						$(this).parent().prev().prev().html(fine);
+						$(this).parent().prev().prev().prev().html(s);
+						$.each($(".borrow_status"),function(index, el) {
+							console.log($(el));
+							if($(el).html()=='yes'){
+							    $(el).css({"color":"green","font-weight":"800"});
+							}
+							if($(el).html()=='no'){
+								$(el).css({"color":"red","font-weight":"800"});
+							}
+						});
+						//请求后台，后台对状态进行改变
+						$.ajax({
+							url: 'http://localhost:3000/checkStatus',
+							type: 'post',
+							dataType: 'json',
+							data: {
+								status: s,
+								borrow_id:$(this).attr("data-id"),
+								current:StringTime(new Date(),"-"),
+								fine:fine
+							},
+							success:function(data){
+								console.log(data)
+							}
+						})
+					})
+				}
+			})
+		});
 	})
 	//图书续借
 	$("#delayBorrow").click(function(){
-		$("#cont").load("html/delayBorrow.html");
+		$("#cont").load("html/delayBorrow.html",function(){
+			$.ajax({
+				url: 'http://localhost:3000/getAllBorrow',
+				type: 'GET',
+				dataType: 'json',
+				success:function(data){
+					console.log(data);
+					var str = '';
+					for(var i in data){
+						str+=`<tr>
+								<td>${data[i].id}</td>
+								<td>${data[i].stu_id}</td>
+								<td>${data[i].book_id}</td>
+								<td>${data[i].borrow_time}</td>
+								<td class="r_time" data-my="${data[i].id}">${data[i].return_time}</td>
+								<td>${data[i].status}</td>
+								<td>${data[i].fine}</td>
+								<td>${data[i].current}</td>
+								<td><a href="##" class="editStatus" data-id="${data[i].id}">续借</a></td>
+							</tr>`
+					}
+					$(".con-book table tbody").html(str);
+					$(".editStatus").click(function(){
+						$(".filter").css('display', 'block');
+						$(".alertbox").css('display', 'block');
+						var return_time = new Date($(this).parent().prev().prev().prev().prev().html());
+						var id =$(this).attr("data-id");
+						$(".certain").click(function(){
+							var val = $("#daycount").val();//获取输入的天数
+							var newDate=new Date(return_time.setDate(return_time.getDate()+Number(val)));
+							$.ajax({
+								url: 'http://localhost:3000/changeBoorrowTime',
+								type: 'post',
+								dataType: 'json',
+								data: {
+									day: StringTime(newDate,'-'),
+									borrow_id:id
+								},
+								success:function(data){
+
+								}
+							})
+							$(".filter").css('display', 'none');
+							$(".alertbox").css('display', 'none');
+							$.each($(".r_time"),function(index, el) {
+								if($(el).attr("data-my")==id){
+									$(el).html(StringTime(newDate,'-'));
+								}
+							})
+							
+						})
+					})
+					
+					$(".delay_back").click(function(){
+						$(".filter").css('display', 'none');
+						$(".alertbox").css('display', 'none');
+					})
+				}
+			})
+		});
 	})
 
 	//增加
@@ -264,4 +413,19 @@ $(function(){
 	$("#pena").click(function(){
 		$("#cont").load("html/penalty.html");
 	})
+	//将时间转换为字符串
+	function StringTime(d,sign){
+		if(!sign){
+			sign = '/'
+		}
+
+		return d.getFullYear()+sign+String3num((d.getMonth()+1))+sign+String3num(d.getDate())+' '+String3num(d.getHours())+':'+String3num(d.getMinutes())+':'+String3num(d.getSeconds());
+	}
+	//不足2位补0
+	function String3num(num){
+		if(num<10){
+			num = '0'+num
+		}
+		return num;
+	}
 })

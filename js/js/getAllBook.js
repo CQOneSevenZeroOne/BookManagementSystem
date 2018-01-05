@@ -1,6 +1,6 @@
 function getAllBook(){
 	$.ajax({
-		url: 'http://localhost:3000/',
+		url: 'http://localhost:3000/getAllBook',
 		type: 'GET',
 		dataType: 'json',
 		success:function(data){

@@ -21,7 +21,7 @@ var connect = mysql.createConnection({
 connect.connect();
 //创建服务器
 //查询所有图书
-app.get("/",function(req, res){
+app.get("/getAllBook",function(req, res){
 	res.append("Access-Control-Allow-Origin","*");
 	//连接后执行——查询
 	connect.query('SELECT * FROM book', function (error, results, fields) {
@@ -69,6 +69,43 @@ app.post("/getBookBySort",function(req, res){
 		if (error) throw error;
 			console.log(results);
 		res.send(JSON.stringify(results));
+	});
+})
+
+//查询所有的借阅记录
+app.get("/getAllBorrow",function(req, res){
+	res.append("Access-Control-Allow-Origin","*");
+	//连接后执行——查询
+	console.log(req.body);
+	connect.query('SELECT * FROM borrow', function (error, results, fields) {
+		console.log(results);
+		if (error) throw error;
+			console.log(results);
+		res.send(JSON.stringify(results));
+	});
+})
+//修改借阅状态
+app.post("/checkStatus",function(req, res){
+	res.append("Access-Control-Allow-Origin","*");
+	//连接后执行——查询
+	console.log(req.body);
+	connect.query(`UPDATE borrow SET status = '${req.body.status}',fine = ${req.body.fine},current = '${req.body.current}' where id = ${req.body.borrow_id}`, function (error, results, fields) {
+		console.log("success");
+		if (error) throw error;
+			console.log("error");
+		res.send(results);
+	});
+})
+//续借图书  修改归还时间
+app.post("/changeBoorrowTime",function(req, res){
+	res.append("Access-Control-Allow-Origin","*");
+	//连接后执行——查询
+	console.log(req.body);
+	connect.query(`UPDATE borrow SET return_time = '${req.body.day}' where id = ${req.body.borrow_id}`, function (error, results, fields) {
+		console.log("success");
+		if (error) throw error;
+			console.log("error");
+		res.send(results);
 	});
 })
 app.listen(3000);
