@@ -280,14 +280,87 @@ $(function() {
 		});
 	})
 
-	//删除
-	$("#deletebook").click(function() {
-		$("#cont").load("html/DeleteBook.html");
-	})
-	$("#deletestu").click(function() {
-		$("#cont").load("html/DeleteUser.html");
+	//删除图书
+	$("#deletebook").click(function(){
+		$("#cont").load("html/DeleteBook.html",function(){
+			//显示在页面上
+			$.ajax({
+				type:"post",
+				url:"http://localhost:6789/showbook",
+				dataType:"json",
+				success:function(data){
+					var str='';
+					for(var i in data){
+						str+=`<tr>
+							<td>${data[i].book_id}</td>
+							<td>${data[i].book_name}</td>
+							<td>${data[i].sort}</td>
+							<td>${data[i].author}</td>
+							<td>${data[i].publish}</td>							
+							<td>${data[i].price}</td>
+							<td id="delbtn"><span>删除</span></td>
+						</tr>`
+					}
+					$(".delete_ta table tbody").html(str);
+					$("#delbtn span").css("cursor","Pointer");
+					//删除数据
+					$("#delbtn span").each(function(){						
+						$(this).click(function(){
+							$.ajax({
+								url:"http://localhost:6789/delbook",
+								type:"post",
+								data:{
+									book_id:$(this).parent().parent().children().eq(0).html()
+								}
+							});
+							$(this).parent().parent().remove();		
+						})
+					})
+				}
+			})
+		})
 	})
 
+	//删除学生
+	$("#deletestu").click(function(){
+		$("#cont").load("html/DeleteUser.html",function(){
+			//显示在页面上
+			$.ajax({
+				type:"post",
+				url:"http://localhost:6789/showstu",
+				dataType:"json",
+				success:function(data){
+					var str='';
+					for(var i in data){
+						str+=`<tr>
+							<td>${data[i].stu_id}</td>
+							<td>${data[i].stu_name}</td>
+							<td>${data[i].sex}</td>
+							<td>${data[i].age}</td>
+							<td>${data[i].major}</td>							
+							<td>${data[i].grade}</td>
+							<td id="delbtn"><span>删除</span></td>
+						</tr>`
+					}
+					$(".delete_ta table tbody").html(str);
+					$("#delbtn span").css("cursor","Pointer");
+					//删除数据
+					$("#delbtn span").each(function(){						
+						$(this).click(function(){
+							$.ajax({
+								url:"http://localhost:6789/delstu",
+								type:"post",
+								data:{
+									stu_id:$(this).parent().parent().children().eq(0).html()
+								}
+							});
+							$(this).parent().parent().remove();		
+						})
+					})
+				}
+			})
+		});
+	})
 	//通过作者查询图书信息
 	$("#authorSearch").click(function() {
 		$("#cont").load("html/search_author.html", function() {
