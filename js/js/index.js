@@ -218,7 +218,28 @@ $(function() {
 	})
 	//修改密码
 	$("#pass").click(function() {
-		$("#cont").load("html/pass_change.html");
+		$("#cont").load("html/pass_change.html",function(){
+			var arr=location.href.split("?");
+			var Num=arr[1];
+			$(".pass_box").css("cursor","pointer")
+			$(".pass_box").click(function(){
+				$.ajax({
+					url:"http://localhost:3000/change_pass",
+					type:"post",
+					data:{
+						manager_id:Num,
+						new_pass:$(".new input").val()
+					},
+					success:function(){
+						if($(".new input").val()==$(".sure input").val()){
+							alert("修改成功！")
+						}else{
+							alert("两次输入的密码不一样！")
+						}
+					}
+				})
+			})
+		});
 	})
 
 	//图书状态审核
