@@ -100,6 +100,7 @@ app.get("/login",function(req,res){
 	});
 });
 
+
 //查询所有图书
 app.get("/getAllBook",function(req, res){
 	res.append("Access-Control-Allow-Origin","*");
@@ -187,6 +188,61 @@ app.post("/changeBoorrowTime",function(req, res){
 			console.log("error");
 		res.send(results);
 	});
+})
+//添加图书
+app.post("/addbook",function(req, res){
+	res.append("Access-Control-Allow-Origin","*");
+	var sql = `INSERT INTO book(book_id,book_name,sort,author,publish,pub_time,price,barcode,total_num,count,location) VALUES (${req.body.book_id},'${req.body.book_name}','${req.body.sort}','${req.body.author}','${req.body.publish}','${req.body.pub_time}','${req.body.price}','${req.body.barcode}',${req.body.total_num},${req.body.count},'${req.body.location}')`;
+    connect.query(sql, function (error, results, fields){
+        if (error) throw error;
+        res.end(JSON.stringify(results));
+    });
+})
+//添加学生
+app.post("/addstu",function(req, res){
+	res.append("Access-Control-Allow-Origin","*");
+    var sql = `INSERT INTO student(stu_id, stu_name, sex, age, major, grade) VALUES (${req.body.stu_id},'${req.body.stu_name}','${req.body.sex}',${req.body.age},'${req.body.major}','${req.body.grade}')`;
+    console.log(sql)
+    connect.query(sql, function (error, results, fields){
+            if (error) throw error;
+            res.end(JSON.stringify(results));
+        });
+})
+//显示图书
+app.post("/showbook",function(req, res){
+    res.append("Access-Control-Allow-Origin","*");
+	var sql = `SELECT * FROM book`;
+    connect.query(sql, function (error, results, fields){
+        if (error) throw error;
+        res.end(JSON.stringify(results));
+    });
+})
+//删除图书
+app.post("/delbook",function(req, res){
+    res.append("Access-Control-Allow-Origin","*");
+	var sql = `DELETE FROM book WHERE book_id=${req.body.book_id}`;
+    connect.query(sql, function (error, results, fields){
+        if (error) throw error;
+        res.end(JSON.stringify(results));
+    });
+})
+//显示学生
+app.post("/showstu",function(req, res){
+    res.append("Access-Control-Allow-Origin","*");
+	var sql = `SELECT * FROM student`;
+    connect.query(sql, function (error, results, fields){
+        if (error) throw error;
+        res.end(JSON.stringify(results));
+    });
+})
+//删除学生
+app.post("/delstu",function(req, res){
+    res.append("Access-Control-Allow-Origin","*");
+	var sql = `DELETE FROM student WHERE stu_id=${req.body.stu_id}`;
+    connect.query(sql, function (error, results, fields){
+        if (error) throw error;
+        res.end(JSON.stringify(results));
+    });
 })
 //监听端口
 app.listen(3000);
