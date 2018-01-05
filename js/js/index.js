@@ -250,7 +250,7 @@ $(function() {
 						location:$("input:eq(9)").val()
 					},
 					success:function(data){
-						
+						alert("添加成功！")
 					}
 				})
 				
@@ -273,7 +273,7 @@ $(function() {
 						grade:$("input:eq(5)").val()
 					},
 					success:function(data){
-						
+						alert("添加成功！")
 					}
 				})
 			})
@@ -313,7 +313,8 @@ $(function() {
 									book_id:$(this).parent().parent().children().eq(0).html()
 								}
 							});
-							$(this).parent().parent().remove();		
+							$(this).parent().parent().remove();
+							alert("删除成功！")		
 						})
 					})
 				}
@@ -354,7 +355,8 @@ $(function() {
 									stu_id:$(this).parent().parent().children().eq(0).html()
 								}
 							});
-							$(this).parent().parent().remove();		
+							$(this).parent().parent().remove();
+							alert("删除成功！")		
 						})
 					})
 				}
