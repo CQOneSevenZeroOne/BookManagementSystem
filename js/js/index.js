@@ -384,7 +384,7 @@ $(function() {
 			//获取到页面上输入的值
 			$(".add_box").click(function(){
 				$.ajax({
-					url:'http://localhost:6789/addbook',
+					url:'http://localhost:3000/addbook',
 					type:'post',
 					data:{
 						book_id:$("input:eq(0)").val(),
@@ -412,7 +412,7 @@ $(function() {
 		$("#cont").load("html/AddStu.html",function(){
 			$(".add_box").click(function(){
 				$.ajax({
-					url:'http://localhost:6789/addstu',
+					url:'http://localhost:3000/addstu',
 					type:'post',
 					data:{
 						stu_id:$("input:eq(0)").val(),
@@ -436,7 +436,7 @@ $(function() {
 			//显示在页面上
 			$.ajax({
 				type:"post",
-				url:"http://localhost:6789/showbook",
+				url:"http://localhost:3000/showbook",
 				dataType:"json",
 				success:function(data){
 					var str='';
@@ -457,7 +457,7 @@ $(function() {
 					$("#delbtn span").each(function(){						
 						$(this).click(function(){
 							$.ajax({
-								url:"http://localhost:6789/delbook",
+								url:"http://localhost:3000/delbook",
 								type:"post",
 								data:{
 									book_id:$(this).parent().parent().children().eq(0).html()
@@ -478,7 +478,7 @@ $(function() {
 			//显示在页面上
 			$.ajax({
 				type:"post",
-				url:"http://localhost:6789/showstu",
+				url:"http://localhost:3000/showstu",
 				dataType:"json",
 				success:function(data){
 					var str='';
@@ -499,7 +499,7 @@ $(function() {
 					$("#delbtn span").each(function(){						
 						$(this).click(function(){
 							$.ajax({
-								url:"http://localhost:6789/delstu",
+								url:"http://localhost:3000/delstu",
 								type:"post",
 								data:{
 									stu_id:$(this).parent().parent().children().eq(0).html()
