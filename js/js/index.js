@@ -222,7 +222,6 @@ $(function() {
 	})
 
 	//图书状态审核
-<<<<<<< HEAD
 	$("#checkStatus").click(function(){
 		$("#cont").load("html/check_borrowStatus.html",function(){
 			//先获取所有的借阅记录
@@ -378,14 +377,6 @@ $(function() {
 				}
 			})
 		});
-=======
-	$("#checkStatus").click(function() {
-		$("#cont").load("html/check_borrowStatus.html");
-	})
-	//图书续借
-	$("#delayBorrow").click(function() {
-		$("#cont").load("html/delayBorrow.html");
->>>>>>> f8019c672b5cda73c5c96b7828612878900fb937
 	})
 	//增加图书
 	$("#addbook").click(function(){
