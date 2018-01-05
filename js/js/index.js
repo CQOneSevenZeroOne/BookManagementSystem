@@ -228,13 +228,56 @@ $(function() {
 	$("#delayBorrow").click(function() {
 		$("#cont").load("html/delayBorrow.html");
 	})
-
-	//增加
-	$("#addbook").click(function() {
-		$("#cont").load("html/AddBook.html");
+	//增加图书
+	$("#addbook").click(function(){
+		$("#cont").load("html/AddBook.html",function(){
+			//获取到页面上输入的值
+			$(".add_box").click(function(){
+				$.ajax({
+					url:'http://localhost:6789/addbook',
+					type:'post',
+					data:{
+						book_id:$("input:eq(0)").val(),
+						book_name:$("input:eq(1)").val(),
+						sort:$("#add_sort option:selected").text(),
+						author:$("input:eq(2)").val(),
+						publish:$("input:eq(3)").val(),
+						pub_time:$("input:eq(4)").val(),
+						price:$("input:eq(5)").val(),
+						barcode:$("input:eq(6)").val(),
+						total_num:$("input:eq(7)").val(),
+						count:$("input:eq(8)").val(),
+						location:$("input:eq(9)").val()
+					},
+					success:function(data){
+						
+					}
+				})
+				
+			})
+		});
 	})
-	$("#addstu").click(function() {
-		$("#cont").load("html/AddStu.html");
+	//增加学生
+	$("#addstu").click(function(){
+		$("#cont").load("html/AddStu.html",function(){
+			$(".add_box").click(function(){
+				$.ajax({
+					url:'http://localhost:6789/addstu',
+					type:'post',
+					data:{
+						stu_id:$("input:eq(0)").val(),
+						stu_name:$("input:eq(1)").val(),
+						sex:$("input:eq(2)").val(),
+						age:$("input:eq(3)").val(),
+						major:$("input:eq(4)").val(),
+						grade:$("input:eq(5)").val()
+					},
+					success:function(data){
+						
+					}
+				})
+			})
+		});
 	})
 
 	//删除
