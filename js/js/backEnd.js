@@ -195,7 +195,7 @@ app.post("/addbook",function(req, res){
 	var sql = `INSERT INTO book(book_id,book_name,sort,author,publish,pub_time,price,barcode,total_num,count,location) VALUES (${req.body.book_id},'${req.body.book_name}','${req.body.sort}','${req.body.author}','${req.body.publish}','${req.body.pub_time}','${req.body.price}','${req.body.barcode}',${req.body.total_num},${req.body.count},'${req.body.location}')`;
     connect.query(sql, function (error, results, fields){
         if (error) throw error;
-        res.end(JSON.stringify(results));
+        res.send(JSON.stringify(results));
     });
 })
 //添加学生
@@ -205,7 +205,7 @@ app.post("/addstu",function(req, res){
     console.log(sql)
     connect.query(sql, function (error, results, fields){
             if (error) throw error;
-            res.end(JSON.stringify(results));
+            res.send(JSON.stringify(results));
         });
 })
 //显示图书
@@ -214,7 +214,7 @@ app.post("/showbook",function(req, res){
 	var sql = `SELECT * FROM book`;
     connect.query(sql, function (error, results, fields){
         if (error) throw error;
-        res.end(JSON.stringify(results));
+        res.send(JSON.stringify(results));
     });
 })
 //删除图书
@@ -223,7 +223,7 @@ app.post("/delbook",function(req, res){
 	var sql = `DELETE FROM book WHERE book_id=${req.body.book_id}`;
     connect.query(sql, function (error, results, fields){
         if (error) throw error;
-        res.end(JSON.stringify(results));
+        res.send(JSON.stringify(results));
     });
 })
 //显示学生
@@ -232,7 +232,7 @@ app.post("/showstu",function(req, res){
 	var sql = `SELECT * FROM student`;
     connect.query(sql, function (error, results, fields){
         if (error) throw error;
-        res.end(JSON.stringify(results));
+        res.send(JSON.stringify(results));
     });
 })
 //删除学生
@@ -241,7 +241,7 @@ app.post("/delstu",function(req, res){
 	var sql = `DELETE FROM student WHERE stu_id=${req.body.stu_id}`;
     connect.query(sql, function (error, results, fields){
         if (error) throw error;
-        res.end(JSON.stringify(results));
+        res.send(JSON.stringify(results));
     });
 })
 //修改密码
@@ -251,8 +251,59 @@ app.post("/change_pass",function(req, res){
 	console.log(sql)
     connect.query(sql, function (error, results, fields){
         if (error) throw error;
-        res.end(JSON.stringify(results));
+        res.send(JSON.stringify(results));
     });
+})
+//获取所有学生信息
+app.get("/getstudent",function(req,res){
+	//解决跨域
+	 res.append("Access-Control-Allow-Origin","*");
+	 connect.query(`SELECT * FROM student`, function(error, results, fields) {
+		if(error) throw error;
+		//console.log(results);
+		res.send(JSON.stringify(results));
+	});
+})
+//修改学生信息
+app.post("/editstudent",function(req,res){
+	//解决跨域
+	res.append("Access-Control-Allow-Origin","*");
+	// 通过req的data事件监听函数，每当接受到请求体的数据，就累加到post变量中
+	console.log(req.body);
+	var str=`UPDATE student SET stu_name ='${req.body.stu_name}',sex = '${req.body.sex}',age ='${req.body.age}',major ='${req.body.major}',grade ='${req.body.grade}' where stu_id =${req.body.id}`;
+	console.log(str)
+	connect.query(str, function(error, results, fields) {
+		if(error) throw error;
+		//console.log(results);
+		res.send(JSON.stringify({
+			
+		}))
+	});
+})
+//获取所有的图书数量
+app.get("/getnum",function(req,res){
+	//解决跨域
+	res.append("Access-Control-Allow-Origin","*");
+	//连接后执行——查询
+	connect.query(`SELECT * FROM book`, function(error, results, fields) {
+		if(error) throw error;
+		//console.log(results);
+		res.send(JSON.stringify(results));
+	});
+})
+//修改图书数量
+app.post("/editnum",function(req,res){
+	//解决跨域
+	res.append("Access-Control-Allow-Origin","*");
+	var str=`UPDATE book SET book_name ='${req.body.book_title}',total_num =${req.body.book_store},count = ${req.body.current_no} where book_id =${req.body.id}`;
+	//console.log(str)
+	connect.query(str, function(error, results, fields) {
+		if(error) throw error;
+		//console.log(results);
+		res.send(JSON.stringify({
+			
+		}))
+	});
 })
 //监听端口
 app.listen(3000);

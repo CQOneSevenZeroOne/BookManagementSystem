@@ -60,4 +60,5 @@ body,ul,li,p,input{margin:0;padding:0;}
     float: left;
     margin-left: 47px;
     border-radius: 7px;
+    cursor: pointer;
 }
