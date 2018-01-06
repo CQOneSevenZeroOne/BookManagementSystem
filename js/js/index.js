@@ -1,5 +1,7 @@
 //前端js代码
 $(function() {
+	//默认页面
+	getAllBook();
 	//头部
 	$("#header").load("html/header.html");
 	//查询
