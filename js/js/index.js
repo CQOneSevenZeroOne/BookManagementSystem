@@ -152,36 +152,101 @@ $(function() {
 	})
 
 	//修改学生信息
-	$("#edit").click(function() {
-		$("#cont").load("html/student.html", function() {
-			$.ajax({
-				type: "get",
-				url: "http://localhost:6789/getstudent",
-				async: true,
-				dataType: "json",
-				success: function(data) {
-					var str = '';
-					for(var i in data) {
-						str += `<tr>
-							<td>${data[i].stu_id}</td>
-							<td>${data[i].stu_name}</td>
-							<td>${data[i].sex}</td>
-							<td>${data[i].age}</td>
-							<td>${data[i].major}</td>
-							<td>${data[i].grade}</td>
-							<td><span class="student_info">修改</span></td>
-						</tr>`
-					}
-					$(".bt table tbody").html(str);
-					$(".student_info").click(function() {
-						$("#cont").load("html/student_change.html")
-
+		$("#edit").click(function() {
+			$("#cont").load("html/student.html", function() {
+				$.ajax({
+					type: "get",
+					url: "http://localhost:6789/getstudent",
+					async: true,
+					dataType: "json",
+					success: function(data) {
+						var str = '';
+						for(var i in data) {
+							str += `<tr>
+								<td>${data[i].stu_id}</td>
+								<td>${data[i].stu_name}</td>
+								<td>${data[i].sex}</td>
+								<td>${data[i].age}</td>
+								<td>${data[i].major}</td>
+								<td>${data[i].grade}</td>
+								<td><span class="student_info" data-id="${data[i].stu_id}">修改</span></td>
+							</tr>`
+						}
+							$(".bt table tbody").html(str);
+							//点击修改后跳转到学生修改的详情页
+							$(".student_info").click(function() {
+								//获取到当前点击的内容
+								var id = $(this).attr("data-id");
+								var name = $(this).parent().prev().prev().prev().prev().prev().html();
+								var sex = $(this).parent().prev().prev().prev().prev().html();
+								var age = $(this).parent().prev().prev().prev().html();
+								var major = $(this).parent().prev().prev().html();
+								var grade = $(this).parent().prev().html();
+								$("#cont").load("html/student_change.html", function() {
+									//把获取到的内容显示在学生信息详情页面上
+									$("#xuehao").val(id);
+									$("#name").val(name);
+									$("#sex").val(sex);
+									$("#age").val(age);
+									$("#major").val(major);
+									$("#grade").val(grade);
+	
+									//点击保存
+									$("#save").click(function() {
+										$.ajax({
+											type: "post",
+											url: "http://localhost:6789/editstudent",
+											async: true,
+											dataType: "json",
+											data: {
+												id: id,
+												stu_name: $("#name").val(),
+												sex: $("#sex").val(),
+												age: $("#age").val(),
+												major: $("#major").val(),
+												grade: $("#grade").val()
+											},
+										success: function() {
+											alert("修改成功");
+									}
+								});
+							})
+							//点击返回
+							$("#back").click(function(){
+								location.reload();
+								/*$("#cont").load("html/student.html",function(){
+									$.ajax({
+										type:"get",
+										url: "http://localhost:6789/getstudent",
+										async: true,
+										dataType: "json",
+										success:function(){
+											var str = '';
+											for(var i in data) {
+												str += `<tr>
+													<td>${data[i].stu_id}</td>
+													<td>${data[i].stu_name}</td>
+													<td>${data[i].sex}</td>
+													<td>${data[i].age}</td>
+													<td>${data[i].major}</td>
+													<td>${data[i].grade}</td>
+													<td><span class="student_info" data-id="${data[i].stu_id}">修改</span></td>
+												</tr>`
+											}
+											$(".bt table tbody").html(str);
+										}
+									});
+									
+								})*/
+							})
+						})
 					})
 				}
 			});
-
+						
 		});
 	})
+		
 	//修改图书数量
 	$("#loss").click(function() {
 		$("#cont").load("html/book_num.html", function() {
@@ -194,25 +259,59 @@ $(function() {
 					var str = '';
 					for(var i in data) {
 						str += `<tr>
-							<td>${data[i].book_id}</td>
-							<td>${data[i].book_name}</td>
-							<td>${data[i].sort}</td>
-							<td>${data[i].author}</td>
-							<td>${data[i].price}</td>
-							<td>${data[i].total_num}</td>
-							<td>${data[i].count}</td>
-							<td>${data[i].location}</td>
-							<td><span class="num">修改</span></td>
-						</tr>`
+						<td>${data[i].book_id}</td>
+						<td>${data[i].book_name}</td>
+						<td>${data[i].sort}</td>
+						<td>${data[i].author}</td>
+						<td>${data[i].price}</td>
+						<td>${data[i].total_num}</td>
+						<td>${data[i].count}</td>
+						<td>${data[i].location}</td>
+						<td><span class="num" data-id="${data[i].book_id}">修改</span></td>
+					</tr>`
 					}
 					$(".bt table tbody").html(str);
+					//点击修改后跳转到数量修改的详情页
 					$(".num").click(function() {
-						$("#cont").load("html/book_num_change.html");
-
+						//获取到当前点击的内容
+						var id = $(this).attr("data-id");
+						var book_title = $(this).parent().prev().prev().prev().prev().prev().prev().prev().html();
+						var current_no = $(this).parent().prev().prev().html();
+						var book_store = $(this).parent().prev().prev().prev().html();
+						$("#cont").load("html/book_num_change.html",function(){
+							//把获取到的内容显示在图书数量详情页面上
+							$(".num_info p input:eq(0)").val(id);
+							$(".num_info p input:eq(1)").val(book_title);
+							$(".num_info p input:eq(2)").val(current_no);
+							$(".num_info p input:eq(3)").val(book_store);
+							
+							//点击保存
+							$(".num_info div:eq(0)").click(function() {
+								$.ajax({
+									type: "post",
+									url: "http://localhost:6789/editnum",
+									async: true,
+									dataType: "json",
+									data: {
+										id: id,
+										book_title: $(".num_info p input:eq(1)").val(),
+										current_no: $(".num_info p input:eq(2)").val(),
+										book_store: $(".num_info p input:eq(3)").val()
+									},
+									success: function() {
+										alert("修改成功");
+									}
+								});
+							})
+							//点击返回
+							$("#back").click(function(){
+								location.reload();
+							})
+						})
 					})
 				}
 			});
-
+	
 		});
 	})
 	//修改密码
