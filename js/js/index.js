@@ -371,6 +371,7 @@ $(function() {
 			editNum();
 		});
 	})
+	
 	//修改密码
 	$("#pass").click(function() {
 		$("#cont").load("html/pass_change.html",function(){
