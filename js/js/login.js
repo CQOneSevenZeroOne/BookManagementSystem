@@ -15,7 +15,9 @@ $(function(){
 				success:function(data){
 					data = JSON.parse(data);
 					if(data.length!=0){
-						location.href = '../index.html';
+						for(var i in data){
+							location.href = '../index.html?'+data[i].id;
+						}
 					}
 				}
 			});
