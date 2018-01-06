@@ -175,3 +175,53 @@
 .alertbox p{
 	text-align: center;
 }
+
+/* 弹出修改框的样式 */
+.editBox{
+	width: 350px;
+	overflow: hidden;
+	background: #fff;
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	margin-top: -100px;
+	margin-left: -150px;
+	font-size: 12px;
+	display: none;
+}
+.editBox h3{
+	line-height: 40px;
+	font-weight: 500;
+	text-align: center;
+	background: #ccc;
+	color: #fff;
+	font-size: 14px;
+}
+.editBox p{
+	padding-right: 70px;
+    text-align: right;
+    line-height: 47px;
+}
+ .editBox input{
+	width: 150px;
+    height: 25px;
+    border: 0;
+    border: 1px solid #eee;
+    outline: none;
+    padding-left:10px ;
+}
+.editBox .tacP{
+	text-align: center;
+	padding: 0;
+}
+.tacP a{
+	display: inline-block;
+    width: 45px;
+    height: 30px;
+    background: #ed5564;
+    line-height: 30px;
+    color: #fff;
+    border-radius: 4px;
+    text-align: center;
+    margin-right: 5px;
+}

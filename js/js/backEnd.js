@@ -132,7 +132,7 @@ app.post("/getBookByName",function(req, res){
 	res.append("Access-Control-Allow-Origin","*");
 	//连接后执行——查询
 	console.log(req.body);
-	connect.query(`SELECT * FROM book where book_name = '${req.body.bookName}' `, function (error, results, fields) {
+	connect.query(`SELECT * FROM book where book_name LIKE '%${req.body.bookName}%' `, function (error, results, fields) {
 		console.log(results);
 		if (error) throw error;
 			console.log(results);
@@ -145,7 +145,7 @@ app.post("/getBookBySort",function(req, res){
 	res.append("Access-Control-Allow-Origin","*");
 	//连接后执行——查询
 	console.log(req.body);
-	connect.query(`SELECT * FROM book where sort = '${req.body.bookSort}' `, function (error, results, fields) {
+	connect.query(`SELECT * FROM book where sort like '%${req.body.bookSort}%' `, function (error, results, fields) {
 		console.log(results);
 		if (error) throw error;
 			console.log(results);
@@ -253,6 +253,19 @@ app.post("/change_pass",function(req, res){
         if (error) throw error;
         res.end(JSON.stringify(results));
     });
+})
+
+//编辑查找出来的图书
+app.post("/editSearchBook",function(req, res){
+	res.append("Access-Control-Allow-Origin","*");
+	//连接后执行——查询
+	console.log(req.body);
+	connect.query(`UPDATE book SET book_name ='${req.body.name}',sort='${req.body.sort}',author='${req.body.author}',publish='${req.body.publish}',price='${req.body.price}',barcode='${req.body.barcode}',total_num='${req.body.total_num}',count='${req.body.count}',location='${req.body.location}' where book_id = ${req.body.id} `, function (error, results, fields) {
+		console.log(results);
+		if (error) throw error;
+			console.log(results);
+		res.send(JSON.stringify(results));
+	});
 })
 //监听端口
 app.listen(3000);
